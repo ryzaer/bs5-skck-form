@@ -1,7 +1,7 @@
 # SKCK FORM (BS5)
 Aplikasi Website back office penerbitan skck
 ### Instalasi
-Cukup klon atau download [Custom MVC](https://github.com/ryzaer/fatfree-skeleton) scripts lalu install menggunakan composer
+Cukup klon atau download [Custom MVC](https://github.com/ryzaer/fatfree-skeleton) scripts, lalu install menggunakan composer. Setelah fatfree-skeleton selesai terinstall, pindahkan bs5-skck-form folder kedalam fatfree-skeleton seperti contoh dibawah
 ### Struktur Folder
 ```
 📂fatfree-skeleton
