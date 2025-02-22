@@ -1,0 +1,35 @@
+/** custom styles here */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
+html,
+body{
+  height:100%;  
+}
+body{
+  font-family: "Lato", sans-serif;
+  display:table;  
+  width:100%;
+}
+header,
+main,
+footer{
+  display:table-row;
+  height:1px;    
+}
+main{
+  height:100%;  
+}
+footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  /* background-color: #f1f1f1; */
+  color: #444;
+  text-align: center;
+}
+.container{
+    padding: 10px;
+}
+
+/* Add next styles here */
