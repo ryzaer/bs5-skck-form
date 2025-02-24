@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", function() {/** custom scripts here */
-var staticCacheName = "pwa-1740199432"; 
+/** custom scripts here */
+var staticCacheName = "pwa-1740378697"; 
 self.addEventListener("install", function (e) {
     e.waitUntil(
     caches.open(staticCacheName).then(function (cache) {
@@ -15,8 +15,8 @@ self.addEventListener("fetch", function (event) {
     )
 });
 class vanilaSPA {
-    constructor() {
-        /** default page container header, main, footer */
+    constructor() {         
+                /** default page container header, main, footer */
         this.siteHead = "header",
         this.siteMain = "main",
         this.siteFoot = "footer",
@@ -26,27 +26,30 @@ class vanilaSPA {
         /** make name page as same as url */
         if(!getMain.getAttribute(this.namePage)){
             getMain.setAttribute(this.namePage,this.getPart());
-        } 
+        }
+    
+                /** add some custom style and script per page */
+        this.onStyle = [],
+        this.onScript = [];
     }
-    route = (event) => {
+        getPart = () => {
+        var path = window.location.pathname.split("/"),
+            part = path[path.length - 1].trim();
+            return part ? part : 'index'
+    };
+        route = (event) => {
         event = event || window.event;
         event.preventDefault();
         window.history.pushState({}, "", event.target.href);                   
         this.getPage();
-    };
-    getPart = () => {
-        var path = window.location.pathname.split("/"),
-            part = path[path.length - 1].trim();
-            return part ? part : 'index'
     };
     getPage = async () => { 
         const mainElement = document.querySelector(this.siteMain);
         var grab=true,page = this.getPart();
 
         /** make page status processing */
-        if(!mainElement.getAttribute(this.nameStat)){
-            mainElement.setAttribute(this.nameStat,'loaded');
-        }
+        if(!mainElement.getAttribute(this.nameStat))
+            mainElement.setAttribute(this.nameStat,'loaded');        
 
         /** make clear that content is not the same content*/
         if(mainElement.getAttribute(this.nameStat) == 'loaded'){
@@ -98,7 +101,42 @@ class vanilaSPA {
     getHash = (ints) => {
         const hashData = window.location.hash.split("#");
         return ints > 1 ? hashData[ints] : hashData[1];
-    }
+    };
+        /**GET SCRIPT */
+    addScript = () =>{
+        if(this.onStyle[this.getPart()])
+            this.onStyle[this.getPart()].forEach((val) => this.getStyle(val));
+        if(this.onScript[this.getPart()])
+            this.onScript[this.getPart()].forEach((val) => this.getScript(val));
+    };
+    getScript = (url) => {
+        if (document.querySelector(`script[src="${url}"]`)){
+            console.log(url + 'already loaded');
+            return Promise.resolve(); 
+        }
+        return new Promise((resolve, reject) => {
+            const script = document.createElement("script");
+            script.src = url;
+            script.async = true;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.body.appendChild(script);
+        })
+    };
+    getStyle = (url) => {
+        if (document.querySelector(`link[href="${url}"]`)) {
+            console.log(url + 'already loaded');
+            return Promise.resolve(); 
+        }
+        return new Promise((resolve, reject) => {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = url;
+            link.onload = resolve;
+            link.onerror = reject;
+            document.head.appendChild(link);
+        })
+    };
 }
 F3 = new vanilaSPA();
 window.onpopstate = F3.getPage;
@@ -112,4 +150,4 @@ document.addEventListener('click', function(event) {
         if (anchor.hasAttribute('href') && !anchor.hasAttribute('target') && !href.startsWith('#') && !href.match(/(http(s)?:)?\/\//)) 
             F3.route(event)
     }
-})});
+});
