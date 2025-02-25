@@ -3,6 +3,5 @@
 	$f3->view("spa_about.htm",function($add){
 		$add->css = ["about.css"];
 		$add->js = ["about.js","data.js"];
-	});
-	
+	});	
 }?>
