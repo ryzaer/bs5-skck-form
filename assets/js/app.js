@@ -1,4 +1,4 @@
-var staticCacheName = "pwa-1740457003"; 
+var staticCacheName = "pwa-1740458737"; 
 self.addEventListener("install", function (e) {
     e.waitUntil(
     caches.open(staticCacheName).then(function (cache) {
@@ -28,8 +28,8 @@ class vanilaSPA {
         }
     
                 /** add some custom style and script per page */
-        this.onStyle = {"index":["assets\/css\/ini.css","assets\/css\/itu.css","assets\/css\/sana.css"]},
-        this.onScript = {"index":["https:\/\/releases.jquery.com\/git\/jquery-git.min.js","assets\/js\/node\/184c8ac1280e6f12031546f4f696dda1.js","assets\/js\/node\/a502dbd4acb69fa19590520bee9d9867.js","assets\/js\/node\/5fd96aacddb8a243d3a87e77504ffe4d.js"]};
+        this.onStyle = {"index":["assets\/css\/ini.css","assets\/css\/itu.css","assets\/css\/sana.css"],"about":["assets\/css\/about.css"]},
+        this.onScript = {"index":["https:\/\/releases.jquery.com\/git\/jquery-git.min.js","assets\/js\/node\/184c8ac1280e6f12031546f4f696dda1.js","assets\/js\/node\/a502dbd4acb69fa19590520bee9d9867.js","assets\/js\/node\/5fd96aacddb8a243d3a87e77504ffe4d.js"],"about":["assets\/js\/node\/3fe2d20952dad2e90da5a3dfbe4ea917.js","assets\/js\/node\/a5a0cf57a47e7af5d221d8b7c2b69d8e.js"]};
     }
         getPart = () => {
         var path = window.location.pathname.split("/"),
