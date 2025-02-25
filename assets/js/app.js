@@ -1,5 +1,4 @@
-/** custom scripts here */
-var staticCacheName = "pwa-1740378697"; 
+var staticCacheName = "pwa-1740457003"; 
 self.addEventListener("install", function (e) {
     e.waitUntil(
     caches.open(staticCacheName).then(function (cache) {
@@ -29,8 +28,8 @@ class vanilaSPA {
         }
     
                 /** add some custom style and script per page */
-        this.onStyle = [],
-        this.onScript = [];
+        this.onStyle = {"index":["assets\/css\/ini.css","assets\/css\/itu.css","assets\/css\/sana.css"]},
+        this.onScript = {"index":["https:\/\/releases.jquery.com\/git\/jquery-git.min.js","assets\/js\/node\/184c8ac1280e6f12031546f4f696dda1.js","assets\/js\/node\/a502dbd4acb69fa19590520bee9d9867.js","assets\/js\/node\/5fd96aacddb8a243d3a87e77504ffe4d.js"]};
     }
         getPart = () => {
         var path = window.location.pathname.split("/"),
@@ -94,6 +93,9 @@ class vanilaSPA {
             }
             /** send status named page same as url */
             mainElement.setAttribute(this.namePage,page);
+            /** add another script here */
+            if(typeof this.addScript === 'function')
+                this.addScript()
         }else{
             console.log("page still loading");
         }
@@ -140,6 +142,9 @@ class vanilaSPA {
 }
 F3 = new vanilaSPA();
 window.onpopstate = F3.getPage;
+if(typeof F3.addScript === 'function')
+    F3.addScript();
+alert(F3.getPart());
 /*window.onload = F3.getPage;*/
 document.addEventListener('click', function(event) {    
     /** Check if the clicked element is an <a> tag */ 
